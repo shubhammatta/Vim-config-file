@@ -4,7 +4,7 @@
 
  " be iMproved, required
 filetype off                  " required
-
+set clipboard=unnamedplus
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -13,6 +13,11 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+Plugin 'dylon/vim-antlr'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'honza/vim-snippets'
+Plugin 'scrooloose/nerdtree'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -25,7 +30,7 @@ Plugin 'git://git.wincent.com/command-t.git'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
+Plugin 'git://github.com/jiangmiao/auto-pairs.git'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -33,7 +38,7 @@ filetype plugin indent on    " required
 "filetype plugin on
 "
 Plugin 'ervandew/supertab'
-Plugin 'Valloric/YouCompleteMe'
+
 " Brief help
 " :PluginList       - lists configured plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
@@ -50,7 +55,7 @@ set termencoding=utf-8
 " disable vi compatibility (emulation of old bugs)
 set nocompatible
 " use indentation of previous line
-set autoindent
+set autoindent 
 " use intelligent indentation for C
 set smartindent
 " configure tabwidth and insert spaces instead of tabs
@@ -59,17 +64,16 @@ set shiftwidth=4     " indent also with 4 spaces
 set expandtab        " expand tabs to spaces
 " wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
 set textwidth=120
-" turn syntax highlighting on
+"turn syntax highlighting on
 set t_Co=256
+colorscheme slate
 syntax on
-" colorscheme wombat256
-" turn line numbers on
+"turn line numbers on
 set number
-" highlight matching braces
+"highlight matching braces
 set showmatch
-" intelligent comments
+"intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
-
 " Install OmniCppComplete like described on http://vim.wikia.com/wiki/C++_code_completion
 " This offers intelligent C++ completion when typing ‘.’ ‘->’ or <C-o>
 " Load standard tag files
@@ -77,7 +81,7 @@ set tags+=~/.vim/tags/cpp
 set tags+=~/.vim/tags/gl
 set tags+=~/.vim/tags/sdl
 set tags+=~/.vim/tags/qt4
-
+set mouse=a
 " Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
 let g:DoxygenToolkit_authorName="John Doe <john@doe.com>"
 
@@ -99,6 +103,7 @@ map <F7> :make<CR>
 map <S-F7> :make clean all<CR>
 " goto definition with F12
 map <F12> <C-]>
+noremap <TAB>   <C-W>w
 " in diff mode we use the spell check keys for merging
 if &diff
   ” diff settings
