@@ -4,8 +4,9 @@
 
  " be iMproved, required
 filetype off                  " required
-set clipboard=unnamedplus
+set clipboard=unnamed
 " set the runtime path to include Vundle and initialize
+set modifiable
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
@@ -14,30 +15,21 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
-Plugin 'dylon/vim-antlr'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'honza/vim-snippets'
 Plugin 'scrooloose/nerdtree'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
+Plugin 'tpope/vim-commentary'
+Plugin 'chriskempson/base16-vim'
+Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Git plugin not hosted on GitHub
 Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'git://github.com/jiangmiao/auto-pairs.git'
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
-Plugin 'ervandew/supertab'
 
 " Brief help
 " :PluginList       - lists configured plugins
@@ -54,6 +46,7 @@ set fenc=utf-8
 set termencoding=utf-8
 " disable vi compatibility (emulation of old bugs)
 set nocompatible
+set autoread
 " use indentation of previous line
 set autoindent 
 " use intelligent indentation for C
@@ -65,11 +58,10 @@ set expandtab        " expand tabs to spaces
 " wrap lines at 120 chars. 80 is somewaht antiquated with nowadays displays.
 set textwidth=120
 "turn syntax highlighting on
-set t_Co=256
-colorscheme slate
-syntax on
+colorscheme base16-default-dark
+au VimEnter *  NERDTree
 "turn line numbers on
-set number
+set relativenumber
 "highlight matching braces
 set showmatch
 "intelligent comments
@@ -82,9 +74,16 @@ set tags+=~/.vim/tags/gl
 set tags+=~/.vim/tags/sdl
 set tags+=~/.vim/tags/qt4
 set mouse=a
-" Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
-let g:DoxygenToolkit_authorName="John Doe <john@doe.com>"
 
+" Install DoxygenToolkit from http://www.vim.org/scripts/script.php?script_id=987
+let mapleader = ','
+set ttyfast
+set ignorecase " case insensitive searching
+set smartcase " case-sensitive if expresson contains a capital letter
+set hlsearch
+set incsearch " set incremental search, like modern browsers
+set nolazyredraw " don't redraw while executing macros
+set showmatch
 " Enhanced keyboard mappings
 "
 " in normal mode F2 will save the file
@@ -104,6 +103,17 @@ map <S-F7> :make clean all<CR>
 " goto definition with F12
 map <F12> <C-]>
 noremap <TAB>   <C-W>w
+
+"mymappings
+imap <c-x> <ESC>Vxi
+imap <c-v> <ESC>pi
+nmap <c-v> p
+nmap <c-x> Vx
+vmap <c-x> x
+map <c-a> <ESC>ggVG
+map <c-s> <ESC>w
+imap <c-z> <ESC>ui
+imap jj <right>
 " in diff mode we use the spell check keys for merging
 if &diff
   ” diff settings
@@ -120,3 +130,4 @@ else
   map <M-Down> ]s
   map <M-Up> [s
 endif
+
